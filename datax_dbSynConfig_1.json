@@ -1,0 +1,59 @@
+{
+    "job": {
+        "setting": {
+            "speed": {
+                 "byte": 1048576
+            }
+        },
+        "content": [
+            {
+                "reader": {
+                    "name": "mysqlreader",
+                    "parameter": {
+                        "username": "root",
+                        "password": "root123",
+                        "connection": [
+                            {
+                                "querySql": [
+                                    "SELECT  id , name  FROM ds.user"
+                                ],
+                                "jdbcUrl": [
+                                    "jdbc:mysql://localhost:3306/ds?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai",
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "writer": {
+                    "name": "hdfswriter",
+                    "parameter": {
+                        "defaultFS": "hdfs://nameservice1",
+                        "fileType": "text",
+                        "path": "/qding/db/test/test",
+                        "fileName": "ds_user",
+						"column": [
+                                {
+                                "name": "id",
+                                "type": "STRING"
+                                },
+                                {
+                                "name": "name",
+                                "type": "STRING"
+                                }
+                        ],
+                        "fieldDelimiter": "\u0001",
+                        "writeMode": "APPEND",
+                        "compress":"gzip"
+                    },
+                    "hadoopConfig":{
+                    "dfs.nameservices": "nameservice1",
+                    "dfs.ha.namenodes.nameservice1": "namenode953,namenode957",
+                    "dfs.namenode.rpc-address.nameservice1.namenode953": "BJ-HOST-112:8020",
+                    "dfs.namenode.servicerpc-address.nameservice1.namenode953": "BJ-HOST-112:8022",
+                    "dfs.client.failover.proxy.provider.nameservice1": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider"
+                    }
+                }
+            }
+        ]
+    }
+}

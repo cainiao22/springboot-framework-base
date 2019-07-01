@@ -1,0 +1,18 @@
+{
+  "jdbcType": "hive",
+  "readerTypes": {
+    "text": "string",
+    "varchar": "string",
+    "char": "string",
+    "longtext":"string",
+    "int4":"int",
+    "int8":"int",
+    "int2":"int",
+    "numeric":"decimal(16, 2)",
+    "decimal":"decimal(16, 2)",
+    "datetime":"string"
+  },
+  "writerTypes": {
+    "string": "text"
+  }
+}
